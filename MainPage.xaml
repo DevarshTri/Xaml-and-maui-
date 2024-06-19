@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="LightGray">
+
+    <ContentPage.Resources>
+        <Style TargetType="telerik:TabViewHeaderItem" x:Key="TabViewHeaderItemStyle">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderColor" Value="LightGray"/>
+            <Setter Property="BorderThickness" Value="2,0,0,0"/>
+            <!--<Setter Property="CornerRadius" Value="15"/>-->
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal"/>
+                        <VisualState Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#61000000" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="Black" />
+                                <Setter Property="BackgroundColor" Value="LightGray" />
+                                <Setter Property="FontAttributes" Value="Bold" />
+                                <!--<Setter Property="CornerRadius" Value="15" />-->
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+        <telerik:RadTabView x:Name="tabView" HeaderItemStyle="{StaticResource TabViewHeaderItemStyle}">
+            <telerik:TabViewItem HeaderText="TSI">
+                <StackLayout Padding="15" BackgroundColor="WhiteSmoke">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <!--Frame 1-->
+                    <Frame BackgroundColor="LawnGreen" CornerRadius="0" Grid.Row="0" Padding="7">
+                        <telerik:RadBorder x:Name="border" BorderColor="Gray" BorderThickness="1" Padding="10">
+                            <VerticalStackLayout>
+                                <Label Text="Connection Parameters"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Start"/>
+                                <Grid ColumnSpacing="10" RowSpacing="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <!-- TCP/IP Radio Button -->
+                                    <RadioButton Content="TCP/IP" 
+                                                 Grid.Column="0" 
+                                                 Grid.Row="0" 
+                                                 Margin="0,8,0,0"
+                                                 VerticalOptions="Center"/>
+
+                                    <!-- IP Address -->
+                                    <HorizontalStackLayout Grid.Column="1" Grid.Row="0" Spacing="2">
+                                        <Label Text="IP Address:" VerticalOptions="Center"/>
+                                        <Border HeightRequest="30" Stroke="White">
+                                            <telerik:RadEntry x:Name="entry" HeightRequest="35"
+                                          BackgroundColor="White"
+                                          Text="192.168.1.49"
+                                          CornerRadius="0"
+                                          WidthRequest="100"
+                                          HorizontalOptions="FillAndExpand"/>
+                                        </Border>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Port -->
+                                    <HorizontalStackLayout Grid.Column="2" Grid.Row="0" Spacing="2">
+                                        <Label Text="Port:" VerticalOptions="Center"/>
+                                        <Border HeightRequest="30" Stroke="White">
+                                            <telerik:RadEntry x:Name="port" HeightRequest="35"
+                                          BackgroundColor="White"
+                                          Text="7777"
+                                          CornerRadius="0"
+                                          WidthRequest="100"
+                                          HorizontalOptions="FillAndExpand"/>
+                                        </Border>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Demo Mode CheckBox -->
+                                    <HorizontalStackLayout Grid.Column="3" Grid.Row="0" Spacing="5">
+                                        <Border Stroke="Black" HeightRequest="20">
+                                            <telerik:RadCheckBox x:Name="checkbox" Background="White"/>
+                                        </Border>
+                                        <Label Text="Demo Mode" VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Test Connection Button -->
+                                    <telerik:RadButton x:Name="button" 
+                                                       Text="Test Connection" 
+                                                       BackgroundColor="White"
+                                                       Margin="0,0,40,0"
+                                                       BorderColor="Black"
+                                                       Grid.Column="4"
+                                                       FontSize="20"
+                                                       VerticalOptions="Center"
+                                                       Grid.RowSpan="2"
+                                                       Grid.ColumnSpan="2"
+                                                       HeightRequest="50"
+                                                       HorizontalOptions="FillAndExpand"/>
+
+                                    <!-- Serial (UART) Radio Button -->
+                                    <RadioButton Content="Serial (UART)" 
+                                                 Grid.Column="0" Grid.Row="1" 
+                                                 VerticalOptions="Center"
+                                                 Margin="0,7,0,0"/>
+
+                                    <!-- COM Port -->
+                                    <HorizontalStackLayout Grid.Column="1" Grid.Row="1" Spacing="2">
+                                        <Label Text="COM Port:" VerticalOptions="Center"/>
+                                        <telerik:RadComboBox x:Name="comboBox" 
+                                         HeightRequest="30" 
+                                         WidthRequest="100"
+                                         Margin="5,0,0,0"
+                                         CornerRadius="0"
+                                         BackgroundColor="White"
+                                         HorizontalOptions="FillAndExpand">
+                                            <telerik:RadComboBox.ItemsSource>
+                                                <x:Array Type="{x:Type x:String}">
+                                                    <x:String>COM4</x:String>
+                                                    <x:String>Item 2</x:String>
+                                                    <x:String>Item 3</x:String>
+                                                    <x:String>Item 4</x:String>
+                                                    <x:String>Item 5</x:String>
+                                                    <x:String>Item 6</x:String>
+                                                    <x:String>Item 7</x:String>
+                                                    <x:String>Item 8</x:String>
+                                                </x:Array>
+                                            </telerik:RadComboBox.ItemsSource>
+                                        </telerik:RadComboBox>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Baud Rate -->
+                                    <HorizontalStackLayout Grid.Column="2" Grid.Row="1" Spacing="2">
+                                        <Label Text="Baud Rate:" VerticalOptions="Center"/>
+                                        <telerik:RadComboBox x:Name="comboBox1" HeightRequest="30" 
+                                         WidthRequest="100"
+                                         CornerRadius="0"
+                                         BackgroundColor="White"
+                                         HorizontalOptions="FillAndExpand">
+                                            <telerik:RadComboBox.ItemsSource>
+                                                <x:Array Type="{x:Type x:String}">
+                                                    <x:String>9600</x:String>
+                                                    <x:String>Item 2</x:String>
+                                                    <x:String>Item 3</x:String>
+                                                    <x:String>Item 4</x:String>
+                                                    <x:String>Item 5</x:String>
+                                                    <x:String>Item 6</x:String>
+                                                    <x:String>Item 7</x:String>
+                                                    <x:String>Item 8</x:String>
+                                                </x:Array>
+                                            </telerik:RadComboBox.ItemsSource>
+                                        </telerik:RadComboBox>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Time Out -->
+                                    <HorizontalStackLayout Grid.Column="3" Grid.Row="1" Spacing="2">
+                                        <Label Text="Time Out:" VerticalOptions="Center"/>
+                                        <Border HeightRequest="30" Stroke="White">
+                                            <telerik:RadEntry x:Name="time" 
+                                          HeightRequest="35"
+                                          BackgroundColor="White"
+                                          Text="60"
+                                          HorizontalTextAlignment="End"
+                                          CornerRadius="0"
+                                          HorizontalOptions="FillAndExpand"/>
+                                        </Border>
+                                        <Label Text="Seconds" VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </telerik:RadBorder>
+                    </Frame>
+
+                    <!--Frame 1-->
+                    <!--Frame 2-->
+                    <Frame Padding="0"
+                           Grid.Row="1"
+                           Margin="0,3,0,0"
+                           
+                           BackgroundColor="DarkCyan"
+                           CornerRadius="0">
+                        <VerticalStackLayout Padding="5">
+                            <telerik:RadBorder x:Name="border1" BorderColor="White" BorderThickness="1">
+                                <VerticalStackLayout Padding="5">
+                                    <!--Transaction Data-->
+                                    <Label Text="Transaction Data"
+                                       FontSize="12"
+                                       FontAttributes="Bold"/>
+                                    <!--Transaction Data-->
+                                    <Grid   ColumnSpacing="10" RowSpacing="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <HorizontalStackLayout Grid.Column="4" Spacing="7" Grid.Row="0" >
+                                            <Label Text="Trans ID (OrigRef Num) :" VerticalOptions="Center" />
+                                            <Border HeightRequest="30" Stroke="White" WidthRequest="150">
+                                                <telerik:RadEntry x:Name="tranid" 
+                                                               HeightRequest="30"                             
+                                                               BackgroundColor="White"
+                                                               Text=""
+                                                               CornerRadius="0"
+                                                               />
+                                            </Border>
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Grid.Column="5" Spacing="7" Grid.Row="0">
+                                            <Border Stroke="Black" HeightRequest="20"  WidthRequest="20">
+                                                <telerik:RadCheckBox x:Name="tid1" BackgroundColor="White" />
+                                            </Border>
+                                            <Label Text="Central TID" 
+                                                VerticalOptions="Center"/>
+                                        </HorizontalStackLayout>
+                                        <!--Trans ID-->
+                                        <!--Amount-->
+                                        <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="2">
+                                            <Label Text="Amount :" VerticalOptions="Center" />
+                                            <Border HeightRequest="30" Stroke="White" >
+                                                <telerik:RadEntry x:Name="Amount" HeightRequest="30"
+                                                  BackgroundColor="White"
+                                                      
+                                                  Text="0.01"
+                                                  HorizontalTextAlignment="End"
+                                                  CornerRadius="0"
+                                                  WidthRequest="100"/>
+                                            </Border>
+                                        </HorizontalStackLayout>
+                                        <!--Amount-->
+                                        <!--Invoice-->
+                                        <HorizontalStackLayout Grid.Column="2" Grid.Row="1" Spacing="2">
+                                            <Label Text="InvNo :" VerticalOptions="Center"/>
+                                            <Border HeightRequest="30">
+                                                <telerik:RadEntry x:Name="Invoice" HeightRequest="30"
+                                                  BackgroundColor="White"
+                                                  Text=""
+                                                  CornerRadius="0"
+                                                  WidthRequest="100"/>
+                                            </Border>
+                                        </HorizontalStackLayout>
+                                        <!--Invoice-->
+                                        <!--Auth Code-->
+                                        <HorizontalStackLayout Grid.Column="3" Grid.Row="1" Spacing="2">
+                                            <Label Text="Auth Code :" VerticalOptions="Center"/>
+                                            <Border HeightRequest="30">
+                                                <telerik:RadEntry x:Name="Auth" HeightRequest="30"
+                                                  BackgroundColor="White"
+                                                  Text=""
+                                                  CornerRadius="0"
+                                                  WidthRequest="100"/>
+                                            </Border>
+                                        </HorizontalStackLayout>
+                                        <!--Auth Code-->
+                                        <!--Request-->
+                                        <HorizontalStackLayout Grid.Column="4" Grid.Row="1" Spacing="2">
+                                            <Label Text="Request :" VerticalOptions="Center" />
+                                            <Border HeightRequest="30">
+                                                <telerik:RadEntry x:Name="Request" 
+                                                  BackgroundColor="White"
+                                                  Text=""
+                                                  WidthRequest="250"
+                                                  CornerRadius="0" />
+                                            </Border>
+                                        </HorizontalStackLayout>
+                                        <!--Request-->
+                                        
+                                    </Grid>
+                                    <!-- tabview-->
+                                    <telerik:RadTabView x:Name="tabView1" Padding="70,5,70,5" HeaderItemStyle="{StaticResource TabViewHeaderItemStyle}">
+                                        <telerik:TabViewItem HeaderText="Credit/Debit">
+                                            <VerticalStackLayout Padding="10" Spacing="5">
+                                                <HorizontalStackLayout Spacing="30">
+                                                    <VerticalStackLayout Spacing="10">
+                                                    <HorizontalStackLayout Spacing="20">
+                                                        <telerik:RadButton  Text="Sale (Credit)" 
+                                                                            FontAttributes="Bold"
+                                                                            BorderColor="LightGray"
+                                                                            BorderThickness="2"
+                                                                            HeightRequest="30"
+                                                                            WidthRequest="150"/>
+                                                        <telerik:RadButton  Text="Refund (Credit)" 
+                                                                            BorderColor="LightGray"
+                                                                            BorderThickness="2"
+                                                                            FontAttributes="Bold"
+                                                                            HeightRequest="30"
+                                                                            WidthRequest="150"/>
+                                                    </HorizontalStackLayout>
+                                                        <HorizontalStackLayout Spacing="20">
+                                                            <telerik:RadButton  Text="Sale (Debit)" 
+                                                                                FontAttributes="Bold"
+                                                                                BorderColor="LightGray"
+                                                                                BorderThickness="2"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="150"/>
+                                                            <telerik:RadButton  Text="Refund (Debit)" 
+                                                                                BorderColor="LightGray"
+                                                                                BorderThickness="2"
+                                                                                FontAttributes="Bold"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="150"/>
+                                                        </HorizontalStackLayout>
+                                                        <HorizontalStackLayout Spacing="10">
+                                                            <telerik:RadButton  Text="Sale (Manual)"
+                                                                                BorderColor="LightGray"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="150"/>
+                                                            <telerik:RadButton  Text="Refund (Manual)" 
+                                                                                BorderColor="LightGray"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="150"/>
+                                                            <telerik:RadButton  Text="Void" 
+                                                                                BorderColor="LightGray"
+                                                                                BorderThickness="2"
+                                                                                FontAttributes="Bold"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="120"/>
+                                                        </HorizontalStackLayout>
+                                                        <HorizontalStackLayout Spacing="60">
+                                                            <HorizontalStackLayout Spacing="10">
+                                                            <Border Stroke="Black" HeightRequest="20" >
+                                                                <telerik:RadCheckBox  BackgroundColor="White" />
+                                                            </Border>
+
+                                                            <Label Text="Prompt for Credit/Debit"
+                                                               VerticalOptions="Center" FontAttributes="Bold"/>
+                                                            </HorizontalStackLayout>
+                                                            <HorizontalStackLayout Spacing="3">
+                                                            <Label Text="Tip :" VerticalOptions="Center" />
+                                                                <Border Stroke="Black" >
+                                                                    <telerik:RadEntry  
+                                                                      BackgroundColor="White"
+                                                                      Text="1.00"
+                                                                      HorizontalTextAlignment="End"
+                                                                      Margin="2,0,0,0"
+                                                                      WidthRequest="70"
+                                                                      CornerRadius="0" />
+                                                                    </Border>
+                                                            </HorizontalStackLayout>
+                                                        </HorizontalStackLayout>
+                                                        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                                                            <telerik:RadButton  Text="Sale (Prompt)" 
+                                                                                BorderColor="LightGray"                                                        
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="150"/>
+                                                            <telerik:RadButton  Text="Adjust Tip" 
+                                                                                BorderColor="LightGray"
+                                                                                BorderThickness="2"
+                                                                                FontAttributes="Bold"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="150"/>
+                                                        </HorizontalStackLayout>
+                                                    </VerticalStackLayout>
+                                                    <Frame HorizontalOptions="End" 
+                                                       Padding="0" 
+                                                       Margin="0,0,15,0"
+                                                       BackgroundColor="LightGray"
+                                                       CornerRadius="0">
+                                                        <VerticalStackLayout Spacing="7" Padding="7">
+                                                            <Label Text="CNP Card Data Processing"/>
+                                                            <!--Account-->
+                                                            <HorizontalStackLayout Spacing="10">
+                                                                <Label Text="Account # :" VerticalOptions="Center"/>
+                                                                <telerik:RadComboBox x:Name="Account" 
+                                                                                 HeightRequest="30" 
+                                                                                 WidthRequest="200" BackgroundColor="White" CornerRadius="0">
+                                                                    <telerik:RadComboBox.ItemsSource>
+                                                                        <x:Array Type="{x:Type x:String}">
+                                                                            <x:String>9600</x:String>
+                                                                            <x:String>Item 2</x:String>
+                                                                            <x:String>Item 3</x:String>
+                                                                            <x:String>Item 4</x:String>
+                                                                            <x:String>Item 5</x:String>
+                                                                            <x:String>Item 6</x:String>
+                                                                            <x:String>Item 7</x:String>
+                                                                            <x:String>Item 8</x:String>
+                                                                        </x:Array>
+                                                                    </telerik:RadComboBox.ItemsSource>
+                                                                </telerik:RadComboBox>
+                                                            </HorizontalStackLayout>
+                                                            <!--Account-->
+                                                            <!--ExpiRy Date-->
+                                                            <HorizontalStackLayout>
+                                                                <Label Text="Expiry Date :" VerticalOptions="Center" />
+
+                                                                <telerik:RadEntry  
+                                                                          BackgroundColor="White"
+                                                                          Text="1224"
+                                                                          Margin="2,0,0,0"
+                                                                          WidthRequest="70"
+                                                                          CornerRadius="0" />
+                                                            </HorizontalStackLayout>
+                                                            <!--ExpiRy Date-->
+                                                            <!--CVV2-->
+                                                            <HorizontalStackLayout>
+                                                                <Label Text="CVV2 :" 
+                                                                   VerticalOptions="Center" 
+                                                                   Margin="41,0,0,0"/>
+
+                                                                <telerik:RadEntry x:Name="CVV2" 
+                                                                              BackgroundColor="White"
+                                                                              Text="201"
+                                                                              Margin="2,0,0,0"
+                                                                              WidthRequest="70"
+                                                                              CornerRadius="0"/>
+                                                            </HorizontalStackLayout>
+                                                            <!--CVV2-->
+                                                            <!-- Button-->
+                                                            <telerik:RadButton x:Name="sale" Text="Sale(CNP)" 
+                                                                           Background="White"
+                                                                           WidthRequest="100"
+                                                                           Margin="0,0,120,0" CornerRadius="0"/>
+                                                            <!-- Button-->
+
+                                                        </VerticalStackLayout>
+                                                    </Frame>
+                                                </HorizontalStackLayout>
+                                                <!--BoxView-->
+                                                <BoxView Color="Black" HeightRequest="2" 
+                                                          WidthRequest="600"
+                                                          />
+                                                <!--BoxView-->
+                                                <!--Buttons-->
+                                                <HorizontalStackLayout Padding="7" Spacing="15"
+                                                                        HorizontalOptions="Center">
+                                                    <telerik:RadButton x:Name="AUTH" Text="AUTH" BorderColor="LightGray" WidthRequest="170" FontAttributes="Bold"/>
+                                                    <telerik:RadButton x:Name="Void" Text="VOID AUTH" BorderColor="LightGray" WidthRequest="170" FontAttributes="Bold"/>
+                                                    <telerik:RadButton x:Name="Post" Text="POSTAUTH" BorderColor="LightGray" WidthRequest="170" FontAttributes="Bold"/>
+                                                    <telerik:RadButton x:Name="VoidPost" Text="VOID POSTAUTH" BorderColor="LightGray" WidthRequest="170" FontAttributes="Bold"/>
+                                                </HorizontalStackLayout>
+                                                <!--Buttons-->
+                                            </VerticalStackLayout>
+                                        </telerik:TabViewItem>
+                                        <telerik:TabViewItem HeaderText="EBT/eWIC">
+                                            <Label Margin="10" Text="This is the content of the Folder tab" />
+                                        </telerik:TabViewItem>
+                                        <telerik:TabViewItem HeaderText="SAF Settings">
+                                            <Label Margin="10" Text="This is the content of the View tab" />
+                                        </telerik:TabViewItem>
+                                        <telerik:TabViewItem HeaderText="SAF Utility">
+                                            <Label Margin="10" Text="This is the content of the View tab" />
+                                        </telerik:TabViewItem>
+                                    </telerik:RadTabView>
+                                    <!-- tabview-->
+                                </VerticalStackLayout>
+                            </telerik:RadBorder>
+                            <!--Trans ID-->
+                        </VerticalStackLayout>
+                    </Frame>
+                    <!--Frame 2-->
+                </StackLayout>
+            </telerik:TabViewItem>
+            <telerik:TabViewItem HeaderText="BoltP2PE">
+                <Label Margin="10" Text="This is the content of the Folder tab" />
+            </telerik:TabViewItem>
+            <telerik:TabViewItem HeaderText="eCoundit">
+                <Label Margin="10" Text="This is the content of the View tab" />
+            </telerik:TabViewItem>
+            <telerik:TabViewItem HeaderText="PAX">
+                <Label Margin="10" Text="This is the content of the View tab" />
+            </telerik:TabViewItem>
+            <telerik:TabViewItem HeaderText="TranCloud">
+                <Label Margin="10" Text="This is the content of the View tab" />
+            </telerik:TabViewItem>
+            <telerik:TabViewItem HeaderText="World Pay">
+                <Label Margin="10" Text="This is the content of the View tab" />
+            </telerik:TabViewItem>
+            <telerik:TabViewItem HeaderText="eWIC">
+                <Label Margin="10" Text="This is the content of the View tab" />
+            </telerik:TabViewItem>
+        </telerik:RadTabView>
+
+    </ScrollView>
+</ContentPage>
